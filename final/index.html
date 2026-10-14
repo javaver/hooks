@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>沙漠快递：阿嚎的复仇 - 3D动漫预览</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#0f0f0f;color:#fff;font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; overflow-x:hidden}
+  header{padding:20px 40px;background:linear-gradient(90deg,#ff6a00,#ee0979);display:flex;justify-content:space-between;align-items:center}
+  header h1{font-size:28px;letter-spacing:2px}
+  header .tag{background:#0003;padding:6px 12px;border-radius:20px;font-size:12px}
+  .hero{display:flex;gap:30px;padding:40px;max-width:1400px;margin:0 auto}
+  .player{flex:2;background:#1a1a1a;border-radius:16px;overflow:hidden;box-shadow:0 20px 60px #0008}
+  .screen{position:relative;aspect-ratio:16/9;background:#000;overflow:hidden}
+  .screen img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 0.3s}
+  .screen img.active{opacity:1}
+  .screen .overlay{position:absolute;bottom:0;left:0;right:0;padding:20px;background:linear-gradient(transparent,#000c)}
+  .screen .overlay h2{font-size:20px;margin-bottom:4px}
+  .screen .overlay p{font-size:13px;opacity:0.8}
+  .controls{display:flex;align-items:center;gap:15px;padding:15px 20px;background:#222}
+  .controls button{background:#fff;color:#000;border:none;width:40px;height:40px;border-radius:50%;font-size:18px;cursor:pointer;display:grid;place-items:center}
+  .controls button:hover{scale:1.05}
+  .progress{flex:1;height:6px;background:#333;border-radius:3px;overflow:hidden;position:relative;cursor:pointer}
+  .progress-bar{height:100%;background:linear-gradient(90deg,#ff6a00,#ee0979);width:0%;transition:width 0.1s linear}
+  .time{font-family:monospace;font-size:13px;min-width:80px;text-align:right}
+  .sidebar{flex:1;display:flex;flex-direction:column;gap:20px}
+  .card{background:#1a1a1a;border-radius:16px;padding:20px}
+  .card h3{font-size:16px;margin-bottom:12px;color:#ff8a00}
+  .assets{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .assets img{width:100%;aspect-ratio:1;border-radius:10px;object-fit:cover;background:#222}
+  .assets .label{font-size:11px;margin-top:4px;opacity:0.7;text-align:center}
+  .timeline{display:flex;gap:8px;overflow-x:auto;padding-bottom:10px}
+  .t-item{min-width:120px;background:#222;border-radius:10px;overflow:hidden;cursor:pointer;border:2px solid transparent;transition:0.2s}
+  .t-item.active{border-color:#ff6a00}
+  .t-item img{width:100%;aspect-ratio:16/9;object-fit:cover}
+  .t-item .info{padding:6px 8px}
+  .t-item .info b{font-size:11px;display:block}
+  .t-item .info span{font-size:10px;opacity:0.6}
+  .prompts{max-width:1400px;margin:0 auto;padding:0 40px 40px}
+  .prompts h2{margin:30px 0 15px;font-size:22px}
+  .shot-detail{background:#1a1a1a;border-radius:12px;padding:20px;margin-bottom:15px;display:flex;gap:20px}
+  .shot-detail img{width:200px;border-radius:8px;aspect-ratio:16/9;object-fit:cover}
+  .shot-detail .text{flex:1}
+  .shot-detail .text h4{color:#ff8a00;margin-bottom:6px}
+  .shot-detail .text p{font-size:13px;line-height:1.6;opacity:0.9;white-space:pre-wrap}
+  .badge{display:inline-block;background:#333;padding:2px 8px;border-radius:10px;font-size:11px;margin-right:6px}
+  .footer{text-align:center;padding:40px;opacity:0.5;font-size:12px}
+  @media(max-width:900px){.hero{flex-direction:column}}
+</style>
+</head>
+<body>
+<header>
+  <h1>🏜️ 沙漠快递：阿嚎的复仇 <span style="font-weight:300">- 60秒3D动漫</span></h1>
+  <div class="tag">Pixar风格 · 8镜头 · 60秒喜剧</div>
+</header>
+
+<div class="hero">
+  <div class="player">
+    <div class="screen" id="screen">
+      <img id="img0" src="../storyboard/Shot1_大远景_饥饿的阿嚎.png" class="active">
+      <img id="img1" src="../storyboard/Shot2_中景_挑衅.png">
+      <img id="img2" src="../storyboard/Shot3_点火_滑板.png">
+      <img id="img3" src="../storyboard/Shot4_公路追逐.png">
+      <img id="img4" src="../storyboard/Shot5_悬崖_直角转弯.png">
+      <img id="img5" src="../storyboard/Shot6_空中定格_哦豁.png">
+      <img id="img6" src="../storyboard/Shot7_坠落_纸片.png">
+      <img id="img7" src="../storyboard/Shot8_结局_彩虹.png">
+      <div class="overlay">
+        <h2 id="shotTitle">Shot 1 / 0-7s 大远景 - 饥饿的阿嚎</h2>
+        <p id="shotDesc">Dolly In 缓慢推近 · 热浪扭曲 · 肚子咕噜</p>
+      </div>
+    </div>
+    <div class="controls">
+      <button id="playBtn">▶</button>
+      <div class="progress" id="progress"><div class="progress-bar" id="bar"></div></div>
+      <div class="time"><span id="cur">00:00</span> / 01:00</div>
+    </div>
+  </div>
+
+  <div class="sidebar">
+    <div class="card">
+      <h3>🎨 核心资产 (已锁定一致性)</h3>
+      <div class="assets">
+        <div><img src="../assets/characters/阿嚎_郊狼_定妆照.png"><div class="label">阿嚎·郊狼</div></div>
+        <div><img src="../assets/characters/咻咻_走鹃_定妆照.png"><div class="label">咻咻·走鹃</div></div>
+        <div><img src="../assets/props/火箭滑板2000.png"><div class="label">火箭滑板2000</div></div>
+        <div><img src="../assets/environments/沙漠公路场景.png"><div class="label">沙漠公路</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>⏱️ 镜头时间轴</h3>
+      <div class="timeline" id="timeline"></div>
+    </div>
+    <div class="card">
+      <h3>💡 制作管线建议</h3>
+      <p style="font-size:13px;line-height:1.7;opacity:0.8">
+        ✅ 剧本 → 视频脚本 → 资产 → 分镜 已完成<br>
+        🎬 下一步：<br>
+        1. 把分镜图+提示词喂给 <b>Luma / Kling / Runway</b><br>
+        2. 图生视频，首帧用分镜，尾帧用下一张<br>
+        3. 8段视频用剪映/CapCut按时长拼接<br>
+        4. 加上BGM和拟声词，Beep Beep用我生成的音频<br>
+        <br>
+        更进阶：资产图 → Tripo3D → Blender绑定 → 真3D渲染
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="prompts">
+  <h2>🎬 8镜头详细分解 + AI视频提示词</h2>
+  <div id="shotList"></div>
+</div>
+
+<div class="footer">Generated by Arena Agent · 3D Anime Pipeline · 郊狼与走鹃 60秒喜剧</div>
+
+<script>
+const shots=[
+  {t:'Shot 1 / 0-7s 大远景 - 饥饿的阿嚎',d:'Dolly In 缓慢推近 · 热浪扭曲 · 肚子咕噜',dur:7, cam:'大远景 Dolly In', action:'阿嚎趴岩石后望远镜', audio:'蝉鸣 风声 肚子咕噜'},
+  {t:'Shot 2 / 7-15s 中景 - 挑衅',d:'Zoom In 快速拉近 · Beep Beep挑衅 · Acme箱子发光',dur:8, cam:'中景 Zoom In', action:'咻咻急刹挑衅，阿嚎掏箱子', audio:'急刹 Beep Beep 箱子叮'},
+  {t:'Shot 3 / 15-28s 全景 - 点火',d:'Tracking Low Angle 低角度跟拍 · 脸吹变形 · 火焰喷射',dur:13, cam:'全景跟随 低角度', action:'火箭滑板点火弹射', audio:'点火咳嗽 轰 哇啊啊'},
+  {t:'Shot 4 / 28-38s 广角 - 公路追逐',d:'并行高速运镜 · 倒着跑 · 仙人掌飞退',dur:10, cam:'广角并行', action:'咻咻倒跑，阿嚎摇晃失控', audio:'急速风声 零件哐啷'},
+  {t:'Shot 5 / 38-45s 俯拍 - 悬崖转弯',d:'急速上摇+急停 · 90度转弯 · 冲出悬崖',dur:7, cam:'俯拍 上摇急停', action:'咻咻跑上晾衣绳，阿嚎飞出', audio:'轮胎吱 悬空静止'},
+  {t:'Shot 6 / 45-50s 特写 - 空中定格',d:'静止轻微晃动 · 举牌哦豁 · 打破第四面墙',dur:5, cam:'特写 静止', action:'阿嚎空中定格举牌', audio:'喜剧静止 乌鸦叫'},
+  {t:'Shot 7 / 50-56s 垂直 - 坠落纸片',d:'极速下坠 Vertigo · 砸出坑 · 变纸片',dur:6, cam:'垂直俯拍 Vertigo Fall', action:'坠落砸坑变2D纸片', audio:'咻啪巨响 纸片呼啦'},
+  {t:'Shot 8 / 56-60s 结局 - 彩虹',d:'缓慢拉远 Dolly Out · 酸成仙人掌 · 彩虹烟尘',dur:4, cam:'中景转远景 拉远', action:'递仙人掌汁，彩虹消失', audio:'吸管 噗 Beep Beep收尾'},
+];
+
+let curIdx=0, curTime=0, total=60, playing=false, timer=null;
+const imgs=[...document.querySelectorAll('.screen img')];
+const titleEl=document.getElementById('shotTitle');
+const descEl=document.getElementById('shotDesc');
+const bar=document.getElementById('bar');
+const curEl=document.getElementById('cur');
+const playBtn=document.getElementById('playBtn');
+
+function fmt(s){return String(Math.floor(s/60)).padStart(2,'0')+':'+String(Math.floor(s%60)).padStart(2,'0')}
+
+function goToShot(i){
+  curIdx=i;
+  imgs.forEach((im,idx)=>im.classList.toggle('active',idx===i));
+  titleEl.textContent=shots[i].t;
+  descEl.textContent=shots[i].d;
+  document.querySelectorAll('.t-item').forEach((el,idx)=>el.classList.toggle('active',idx===i));
+  // calc time
+  let t=0; for(let k=0;k<i;k++) t+=shots[k].dur;
+  curTime=t;
+  updateBar();
+}
+
+function updateBar(){
+  bar.style.width=(curTime/total*100)+'%';
+  curEl.textContent=fmt(curTime);
+}
+
+function tick(){
+  curTime+=0.1;
+  if(curTime>=total){curTime=total; pause(); curTime=0; goToShot(0);}
+  // check shot change
+  let acc=0, idx=0;
+  for(let i=0;i<shots.length;i++){acc+=shots[i].dur; if(curTime<acc){idx=i;break;}}
+  if(idx!==curIdx) goToShot(idx);
+  updateBar();
+}
+
+function play(){ if(playing) return; playing=true; playBtn.textContent='⏸'; timer=setInterval(tick,100);}
+function pause(){ playing=false; playBtn.textContent='▶'; clearInterval(timer);}
+
+playBtn.onclick=()=>playing?pause():play();
+document.getElementById('progress').onclick=(e)=>{
+  const rect=e.currentTarget.getBoundingClientRect();
+  const p=(e.clientX-rect.left)/rect.width;
+  curTime=p*total;
+  let acc=0;
+  for(let i=0;i<shots.length;i++){acc+=shots[i].dur; if(curTime<acc){goToShot(i);break;}}
+  updateBar();
+}
+
+// timeline
+const tl=document.getElementById('timeline');
+shots.forEach((s,i)=>{
+  const div=document.createElement('div');
+  div.className='t-item'+(i===0?' active':'');
+  div.innerHTML=`<img src="../storyboard/Shot${i+1}_${['大远景','中景','点火','公路追逐','悬崖','空中定格','坠落','结局'][i]}_${['饥饿的阿嚎','挑衅','滑板','', '直角转弯','哦豁','纸片','彩虹'][i]||''}.png" onerror="this.src='../storyboard/Shot${i+1}_${document.querySelectorAll('.screen img')[i].src.split('/').pop().split('_')[0]}_*.png'; this.src=document.querySelectorAll('.screen img')[i].src"><div class="info"><b>${s.t.split(' ')[0]} ${s.dur}s</b><span>${s.cam}</span></div>`;
+  // fix src directly
+  div.querySelector('img').src=document.getElementById('img'+i).src;
+  div.onclick=()=>{goToShot(i); if(!playing) play();};
+  tl.appendChild(div);
+});
+
+// shot list details
+const list=document.getElementById('shotList');
+shots.forEach((s,i)=>{
+  const d=document.createElement('div');
+  d.className='shot-detail';
+  d.innerHTML=`<img src="${document.getElementById('img'+i).src}"><div class="text"><h4>${s.t}</h4><p><span class="badge">${s.cam}</span><span class="badge">${s.dur}s</span><span class="badge">${s.audio}</span></p><p style="margin-top:8px"><b>动作：</b>${s.action}<br><b>运镜：</b>${s.d}<br><b>音效：</b>${s.audio}</p><p style="margin-top:8px;opacity:0.6;font-size:12px">提示词已在 /video_prompts/AI视频生成提示词_可直接复制.md 中，可直接复制到Luma/Kling</p></div>`;
+  list.appendChild(d);
+});
+
+goToShot(0);
+</script>
+</body>
+</html>
