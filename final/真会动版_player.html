@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>沙漠快递 - 真会动版 60秒</title>
+<style>
+body{background:#0a0a0a;color:#fff;font-family:PingFang SC,Microsoft YaHei,sans-serif;margin:0;padding:20px;text-align:center}
+h1{color:#ff6a00;font-size:32px}
+.subtitle{opacity:0.7;margin-bottom:20px}
+video{width:95%;max-width:1280px;border-radius:16px;box-shadow:0 20px 60px #000;margin:20px auto;display:block;background:#000}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;max-width:1300px;margin:30px auto;text-align:left}
+.card{background:#1a1a1a;border-radius:12px;padding:20px}
+.card h3{color:#ff8a00;margin-bottom:10px}
+.btn{display:inline-block;background:linear-gradient(90deg,#ff6a00,#ee0979);color:#fff;padding:12px 24px;border-radius:24px;text-decoration:none;margin:8px;font-weight:bold}
+.badge{background:#333;padding:4px 10px;border-radius:12px;font-size:12px;margin-right:6px}
+</style>
+</head>
+<body>
+<h1>🏜️ 沙漠快递：真会动版 60秒</h1>
+<p class="subtitle">角色真的会跑、会转弯、会坠落 - 精灵动画 + 3D资产合成</p>
+
+<video controls autoplay loop playsinline poster="../storyboard/Shot1_大远景_饥饿的阿嚎.png">
+  <source src="沙漠快递_60秒_真会动版.mp4" type="video/mp4">
+  你的浏览器不支持视频
+</video>
+
+<div>
+<a class="btn" href="沙漠快递_60秒_真会动版.mp4" download>📥 下载真会动版 (21MB)</a>
+<a class="btn" href="沙漠快递_60秒_动态分镜.mp4" download>📥 下载分镜版 (43MB)</a>
+<a class="btn" href="index.html">🎬 分镜播放器</a>
+<a class="btn" href="video_player.html">🎥 之前版本</a>
+</div>
+
+<div class="grid">
+<div class="card">
+<h3>✅ 这次真的会动了！</h3>
+<p>
+<span class="badge">Shot1 0-7s</span> 阿嚎呼吸探头<br>
+<span class="badge">Shot2 7-15s</span> 咻咻从右侧高速冲入急刹，带Beep Beep<br>
+<span class="badge">Shot3 15-28s</span> 火箭滑板左右摇晃发射<br>
+<span class="badge">Shot4 28-38s</span> 公路追逐，咻咻在前倒跑，阿嚎在后摇晃追<br>
+<span class="badge">Shot5 38-45s</span> 悬崖90度直角转弯，阿嚎冲出悬崖<br>
+<span class="badge">Shot6 45-50s</span> 空中定格举牌“哦豁”<br>
+<span class="badge">Shot7 50-56s</span> 自由落体坠落<br>
+<span class="badge">Shot8 56-60s</span> 递仙人掌汁，彩虹消失<br>
+全部角色位移都是代码驱动的真实移动，不是Ken Burns平移！
+</p>
+</div>
+<div class="card">
+<h3>🎨 技术实现</h3>
+<p>
+- 背景：3D Pixar沙漠+悬崖定妆照<br>
+- 角色：阿嚎/咻咻定妆照去白底做精灵，带透明通道<br>
+- 动画：MoviePy精灵位置动画，8镜头60秒精确<br>
+- 音效：Beep Beep在8秒和56秒，Oh no在45秒<br>
+- 下一步可升级：把精灵替换为Tripo3D生成的真3D模型，或用Luma图生视频
+</p>
+</div>
+<div class="card">
+<h3>🚀 如何升级到真3D动漫</h3>
+<p>
+当前是2.5D精灵动画，已会动。升级路径：<br>
+1. 资产图 → <b>Tripo3D / Meshy</b> 生成3D模型<br>
+2. 导入Blender绑定<br>
+3. 按此真会动版的位移路径做关键帧<br>
+4. 或直接把此视频+分镜图喂给 <b>Kling / Luma</b> 的视频参考功能，一键转3D<br>
+提示词已在 <code>video_prompts/</code> 准备好
+</p>
+</div>
+</div>
+
+</body>
+</html>
